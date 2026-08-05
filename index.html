@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khan AI</title>
+  <style>
+    *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f7fb;color:#172033}main{max-width:760px;margin:70px auto;padding:24px}.card{background:#fff;border-radius:20px;padding:28px;box-shadow:0 10px 35px #00000012}h1{margin:0 0 8px;font-size:32px}.sub{color:#687386;margin-bottom:24px}.chat{min-height:280px;border:1px solid #e4e8ef;border-radius:14px;padding:16px;margin-bottom:14px}.msg{padding:10px 13px;border-radius:12px;margin:8px 0;max-width:85%;white-space:pre-wrap}.user{margin-left:auto;background:#172033;color:white}.ai{background:#eef2f7}.row{display:flex;gap:10px}input{flex:1;padding:14px;border:1px solid #d9dee8;border-radius:12px;font-size:16px}button{border:0;border-radius:12px;padding:0 20px;background:#172033;color:white;font-weight:700;cursor:pointer}button:disabled{opacity:.5}</style>
+</head>
+<body><main><div class="card"><h1>🤖 Khan AI</h1><div class="sub">Ask a question. Get a simple answer.</div><div id="chat" class="chat"><div class="msg ai">Hello! I’m Khan AI. Ask me anything.</div></div><div class="row"><input id="input" placeholder="Type your question..." autocomplete="off"/><button id="send">Send</button></div></div></main>
+<script>
+const input=document.getElementById('input'),send=document.getElementById('send'),chat=document.getElementById('chat');
+function add(text,cls){const d=document.createElement('div');d.className='msg '+cls;d.textContent=text;chat.appendChild(d);chat.scrollTop=chat.scrollHeight;}
+function answer(q){const x=q.toLowerCase(); if(x.includes('hello')||x.includes('hi')) return 'Hello! How can I help you?'; if(x.includes('who are you')) return 'I’m Khan AI, a simple AI assistant.'; if(x.includes('time')) return 'I can help with time questions when connected to a live AI service.'; return 'I received your question: “'+q+'”\n\nTo make Khan AI generate real AI answers, connect this interface to an AI API using a secure server-side API key.';}
+function ask(){const q=input.value.trim();if(!q)return;add(q,'user');input.value='';send.disabled=true;setTimeout(()=>{add(answer(q),'ai');send.disabled=false;input.focus()},350)}
+send.onclick=ask;input.addEventListener('keydown',e=>{if(e.key==='Enter')ask()});
+</script></body></html>
